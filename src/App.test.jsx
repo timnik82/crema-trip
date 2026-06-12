@@ -40,12 +40,12 @@ test('marks the active restaurant filter for assistive tech', () => {
 
 test('keeps the target slot valid when changing itinerary day', () => {
   render(<App />);
-  const plannedItems = document.querySelectorAll('.itinerary-card').length;
+  const plannedItems = screen.getAllByTestId('itinerary-card').length;
 
   fireEvent.change(screen.getByLabelText('Day'), { target: { value: 'thu-18' } });
   fireEvent.click(screen.getByRole('button', { name: 'Add activity' }));
 
-  expect(document.querySelectorAll('.itinerary-card')).toHaveLength(plannedItems + 1);
+  expect(screen.getAllByTestId('itinerary-card')).toHaveLength(plannedItems + 1);
 });
 
 test('renders food checklist when stored checklist data is malformed', () => {

@@ -111,6 +111,7 @@ export function ItinerarySection({ itinerary, setItinerary }) {
                   return (
                     <div
                       key={item.id}
+                      data-testid="itinerary-card"
                       className={`itinerary-card ${item.locked ? 'is-locked' : ''} ${item.status ? `is-${item.status}` : ''}`}
                     >
                       <div className="card-title-row">
