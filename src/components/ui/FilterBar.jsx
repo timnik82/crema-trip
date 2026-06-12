@@ -6,6 +6,7 @@ export function FilterBar({ filters, activeFilter, onChange }) {
           type="button"
           key={filter}
           className={activeFilter === filter ? 'filter-pill is-active' : 'filter-pill'}
+          aria-pressed={activeFilter === filter}
           onClick={() => onChange(filter)}
         >
           {filter}

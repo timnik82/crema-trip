@@ -117,6 +117,8 @@ export const restaurantFilters = [
   'All',
   'Must Try',
   'Good Backup',
+  'Only If Nearby',
+  'Probably Skippable',
   'Aperitivo',
   'Pizza',
   'Fine Dining',

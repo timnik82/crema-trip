@@ -21,7 +21,7 @@ export default function App() {
   const [favourites, setFavourites] = useLocalStorage(storageKeys.favourites, []);
   const [triedFood, setTriedFood] = useLocalStorage(storageKeys.foodChecklist, []);
   const [bookingStatuses, setBookingStatuses] = useLocalStorage(storageKeys.bookingStatuses, {});
-  const [itinerary, setItinerary] = useLocalStorage(storageKeys.itinerary, buildInitialItinerary());
+  const [itinerary, setItinerary] = useLocalStorage(storageKeys.itinerary, buildInitialItinerary);
 
   return (
     <div className="app-shell">

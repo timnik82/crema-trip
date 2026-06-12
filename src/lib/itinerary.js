@@ -2,6 +2,16 @@ import { activityPool, itineraryDays } from '../data/itinerary.js';
 
 const clone = (value) => JSON.parse(JSON.stringify(value));
 
+let itemCounter = 0;
+
+function createItineraryItemId(activityId) {
+  if (globalThis.crypto?.randomUUID) {
+    return `${activityId}-${globalThis.crypto.randomUUID()}`;
+  }
+  itemCounter += 1;
+  return `${activityId}-${Date.now()}-${itemCounter}`;
+}
+
 export function buildInitialItinerary() {
   return clone(itineraryDays);
 }
@@ -48,7 +58,7 @@ export function addActivityToSlot(days, dayId, slotId, activityId) {
   }
 
   const newItem = {
-    id: `${activity.id}-${Date.now()}`,
+    id: createItineraryItemId(activity.id),
     sourceActivityId: activity.id,
     title: activity.title,
     description: activity.description,

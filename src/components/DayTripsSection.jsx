@@ -3,10 +3,11 @@ import { MapLink } from './ui/MapLink.jsx';
 import { StarToggle } from './ui/StarToggle.jsx';
 
 function valueClass(value) {
-  if (value.toLowerCase().includes('very')) {
+  const normalizedValue = typeof value === 'string' ? value.toLowerCase() : '';
+  if (normalizedValue.includes('very')) {
     return 'very-high';
   }
-  if (value.toLowerCase().includes('high')) {
+  if (normalizedValue.includes('high')) {
     return 'high';
   }
   return 'medium';

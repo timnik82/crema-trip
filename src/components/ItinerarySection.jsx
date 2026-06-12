@@ -47,7 +47,15 @@ export function ItinerarySection({ itinerary, setItinerary }) {
         <div className="toolbar-fields">
           <label className="field-label">
             <span>Day</span>
-            <select value={targetDay} onChange={(event) => setTargetDay(event.target.value)}>
+            <select
+              value={targetDay}
+              onChange={(event) => {
+                const nextDayId = event.target.value;
+                const nextDay = itinerary.find((day) => day.id === nextDayId);
+                setTargetDay(nextDayId);
+                setTargetSlot(nextDay?.slots[0]?.id ?? '');
+              }}
+            >
               {itinerary.map((day) => (
                 <option key={day.id} value={day.id}>
                   {day.label}
@@ -112,8 +120,8 @@ export function ItinerarySection({ itinerary, setItinerary }) {
                       <p>{item.description}</p>
                       {warnings.length > 0 ? (
                         <ul className="warning-list">
-                          {warnings.map((warning) => (
-                            <li key={warning}>{warning}</li>
+                          {warnings.map((warning, index) => (
+                            <li key={`${item.id}-${index}-${warning}`}>{warning}</li>
                           ))}
                         </ul>
                       ) : null}

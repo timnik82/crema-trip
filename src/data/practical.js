@@ -14,7 +14,7 @@ export const practicalSections = [
     items: [
       'Vorrei assaggiare i tortelli cremaschi. - I would like to try the tortelli cremaschi.',
       'Avete un tavolo per due? - Do you have a table for two?',
-      'C e la ZTL qui? Dove posso parcheggiare? - Is there a ZTL here? Where can I park?',
+      "C'è la ZTL qui? Dove posso parcheggiare? - Is there a ZTL here? Where can I park?",
       'Un biglietto per Cremona, solo andata. - A one-way ticket to Cremona.',
     ],
   },

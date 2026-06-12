@@ -24,7 +24,9 @@
 - [ ] **Step 1: Write failing render test**
 
 ```jsx
+import '@testing-library/jest-dom/vitest';
 import { render, screen } from '@testing-library/react';
+import { expect, test } from 'vitest';
 import App from './App.jsx';
 
 test('renders the MVP guide sections', () => {
@@ -65,6 +67,7 @@ Expected: PASS.
 - [ ] **Step 1: Write failing data integrity tests**
 
 ```js
+import { expect, test } from 'vitest';
 import { foodItems } from './food.js';
 import { restaurants } from './restaurants.js';
 import { itineraryDays } from './itinerary.js';
@@ -113,12 +116,14 @@ Expected: PASS.
 - [ ] **Step 1: Write failing state/helper tests**
 
 ```js
+import { expect, test } from 'vitest';
 import { buildInitialItinerary, resetItinerary, updateItineraryItemStatus } from './itinerary.js';
 
 test('resetItinerary restores the suggested itinerary', () => {
   const initial = buildInitialItinerary();
-  const changed = updateItineraryItemStatus(initial, 'cremona-day', 'skipped');
-  expect(resetItinerary(changed)).toEqual(initial);
+  const changed = updateItineraryItemStatus(initial, 'first-wander', 'skipped');
+  expect(changed).not.toEqual(initial);
+  expect(resetItinerary()).toEqual(initial);
 });
 
 test('locked itinerary items cannot be marked skipped', () => {
@@ -152,7 +157,9 @@ Expected: PASS.
 - [ ] **Step 1: Write failing interaction tests**
 
 ```jsx
+import '@testing-library/jest-dom/vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
+import { expect, test } from 'vitest';
 import App from './App.jsx';
 
 test('saves food checklist state in localStorage', () => {

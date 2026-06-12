@@ -1,10 +1,13 @@
 import { foodItems } from '../data/food.js';
 
 export function FoodSection({ triedFood, setTriedFood }) {
+  const triedFoodIds = Array.isArray(triedFood) ? triedFood : [];
+
   function toggleFood(foodId) {
-    setTriedFood((current) =>
-      current.includes(foodId) ? current.filter((id) => id !== foodId) : [...current, foodId]
-    );
+    setTriedFood((current) => {
+      const currentIds = Array.isArray(current) ? current : [];
+      return currentIds.includes(foodId) ? currentIds.filter((id) => id !== foodId) : [...currentIds, foodId];
+    });
   }
 
   return (
@@ -16,7 +19,7 @@ export function FoodSection({ triedFood, setTriedFood }) {
       </div>
       <div className="card-grid">
         {foodItems.map((food) => {
-          const isTried = triedFood.includes(food.id);
+          const isTried = triedFoodIds.includes(food.id);
           return (
             <article key={food.id} className={isTried ? 'info-card is-checked' : 'info-card'}>
               <div className="card-title-row">
@@ -36,7 +39,7 @@ export function FoodSection({ triedFood, setTriedFood }) {
                 type="button"
                 className={isTried ? 'secondary-button is-active' : 'secondary-button'}
                 aria-pressed={isTried}
-                aria-label={`${isTried ? 'Mark' : 'Mark'} ${food.name.toLowerCase()} as ${isTried ? 'not tried' : 'tried'}`}
+                aria-label={`${isTried ? 'Unmark' : 'Mark'} ${food.name.toLowerCase()} as ${isTried ? 'not tried' : 'tried'}`}
                 onClick={() => toggleFood(food.id)}
               >
                 {isTried ? 'Tried' : 'Mark tried'}

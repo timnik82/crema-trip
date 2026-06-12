@@ -4,16 +4,20 @@ function canUseStorage() {
   return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
 }
 
+function resolveInitialValue(initialValue) {
+  return typeof initialValue === 'function' ? initialValue() : initialValue;
+}
+
 function readStorageValue(key, initialValue) {
   if (!canUseStorage()) {
-    return initialValue;
+    return resolveInitialValue(initialValue);
   }
 
   try {
     const stored = window.localStorage.getItem(key);
-    return stored === null ? initialValue : JSON.parse(stored);
+    return stored === null ? resolveInitialValue(initialValue) : JSON.parse(stored);
   } catch {
-    return initialValue;
+    return resolveInitialValue(initialValue);
   }
 }
 
@@ -44,7 +48,7 @@ export function useLocalStorage(key, initialValue) {
   );
 
   const resetStoredValue = useCallback(() => {
-    setStoredValue(initialValue);
+    setStoredValue(resolveInitialValue(initialValue));
   }, [initialValue, setStoredValue]);
 
   return [value, setStoredValue, resetStoredValue];
