@@ -1,3 +1,5 @@
+import { beforeEach } from 'vitest';
+
 function createStorage() {
   const values = new Map();
 
@@ -24,9 +26,23 @@ function createStorage() {
   };
 }
 
-if (!window.localStorage) {
+function ensureLocalStorage() {
+  try {
+    if (window.localStorage) {
+      return;
+    }
+  } catch {
+    // Fall through to the test fallback below.
+  }
+
   Object.defineProperty(window, 'localStorage', {
     configurable: true,
     value: createStorage(),
   });
 }
+
+ensureLocalStorage();
+
+beforeEach(() => {
+  window.localStorage.clear();
+});

@@ -1,18 +1,19 @@
+import { useState } from 'react';
 import { tripOverview } from '../data/trip.js';
 
 export function Overview() {
-  function useFallbackImage(event) {
-    if (event.currentTarget.src.endsWith(tripOverview.heroImageFallback)) {
-      return;
-    }
+  const [heroImage, setHeroImage] = useState(tripOverview.heroImage);
 
-    event.currentTarget.src = tripOverview.heroImageFallback;
+  function useFallbackImage() {
+    setHeroImage((currentImage) =>
+      currentImage === tripOverview.heroImageFallback ? currentImage : tripOverview.heroImageFallback
+    );
   }
 
   return (
     <section id="overview" className="hero-section">
       <div className="hero-media">
-        <img src={tripOverview.heroImage} alt={tripOverview.heroImageAlt} onError={useFallbackImage} />
+        <img src={heroImage} alt={tripOverview.heroImageAlt} onError={useFallbackImage} />
         <a href={tripOverview.heroImageCreditUrl} target="_blank" rel="noreferrer">
           Image: {tripOverview.heroImageCredit}
         </a>

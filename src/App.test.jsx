@@ -18,6 +18,15 @@ test('renders the MVP guide sections', () => {
   expect(screen.getByRole('heading', { name: /Restaurants/i })).toBeInTheDocument();
 });
 
+test('uses the local hero image fallback when the remote image fails', () => {
+  render(<App />);
+  const heroImage = screen.getByAltText(/Town Hall in Piazza Duomo, Crema/i);
+
+  fireEvent.error(heroImage);
+
+  expect(heroImage).toHaveAttribute('src', '/crema-hero-fallback.svg');
+});
+
 test('saves food checklist state in localStorage', () => {
   render(<App />);
   fireEvent.click(screen.getByRole('button', { name: /Mark tortelli cremaschi as tried/i }));
