@@ -4,6 +4,7 @@ export const tripOverview = {
   base: 'Crema, Lombardy',
   heroImage:
     'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Palazzo-comunale-2017.jpg/1000px-Palazzo-comunale-2017.jpg',
+  heroImageFallback: '/crema-hero-fallback.svg',
   heroImageAlt: 'Town Hall in Piazza Duomo, Crema',
   heroImageCredit: 'Wikimedia Commons',
   heroImageCreditUrl: 'https://commons.wikimedia.org/wiki/File:Palazzo-comunale-2017.jpg',

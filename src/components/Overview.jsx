@@ -1,10 +1,18 @@
 import { tripOverview } from '../data/trip.js';
 
 export function Overview() {
+  function useFallbackImage(event) {
+    if (event.currentTarget.src.endsWith(tripOverview.heroImageFallback)) {
+      return;
+    }
+
+    event.currentTarget.src = tripOverview.heroImageFallback;
+  }
+
   return (
     <section id="overview" className="hero-section">
       <div className="hero-media">
-        <img src={tripOverview.heroImage} alt={tripOverview.heroImageAlt} />
+        <img src={tripOverview.heroImage} alt={tripOverview.heroImageAlt} onError={useFallbackImage} />
         <a href={tripOverview.heroImageCreditUrl} target="_blank" rel="noreferrer">
           Image: {tripOverview.heroImageCredit}
         </a>

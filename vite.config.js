@@ -6,9 +6,7 @@ export default defineConfig(({ command }) => ({
   optimizeDeps:
     command === 'serve'
       ? {
-          disabled: 'dev',
-          noDiscovery: true,
-          include: [],
+          include: ['react', 'react-dom', 'react/jsx-dev-runtime'],
         }
       : {
           noDiscovery: true,
@@ -16,5 +14,11 @@ export default defineConfig(({ command }) => ({
         },
   test: {
     environment: 'jsdom',
+    environmentOptions: {
+      jsdom: {
+        url: 'http://localhost:5173/',
+      },
+    },
+    setupFiles: ['./src/test/setup.js'],
   },
 }));
